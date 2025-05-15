@@ -1,0 +1,26 @@
+// filepath: c:\Users\2TDS2\documents\projeto-energia-back\prisma\schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Comodo {
+  id           Int          @id @default(autoincrement())
+  nome         String
+  dispositivos Dispositivo[]
+}
+
+model Dispositivo {
+  id         Int     @id @default(autoincrement())
+  nome       String  // Tipo: ventilador, TV, etc.
+  potencia   Float   // em Watts (W)
+  tempoUso   Float   // em horas por dia
+  voltagem   Float   // em Volts (V)
+  corrente   Float   // em Amperes (A)
+  comodoId   Int
+  comodo     Comodo  @relation(fields: [comodoId], references: [id])
+}
