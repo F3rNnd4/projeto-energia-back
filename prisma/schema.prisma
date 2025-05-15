@@ -12,6 +12,8 @@ model Comodo {
   id           Int          @id @default(autoincrement())
   nome         String
   dispositivos Dispositivo[]
+
+  @@map("comodos")
 }
 
 model Dispositivo {
@@ -23,4 +25,6 @@ model Dispositivo {
   corrente   Float   // em Amperes (A)
   comodoId   Int
   comodo     Comodo  @relation(fields: [comodoId], references: [id])
+
+  @@map("dispositivos")
 }
