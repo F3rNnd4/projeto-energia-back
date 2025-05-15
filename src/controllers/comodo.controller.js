@@ -110,6 +110,45 @@ class ComodoController {
       });
     }
   }
+
+  // Deletar um cômodo pelo ID
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+  
+      if (!id || isNaN(id)) {
+        return res.status(400).json({
+          message: "ID inválido. Deve ser um número.",
+        });
+      }
+  
+      const comodoDeletado = await ComodoModel.delete(id);
+  
+      if (!comodoDeletado) {
+        return res.status(404).json({
+          message: `Cômodo com ID ${id} não encontrado.`,
+        });
+      }
+  
+      return res.status(200).json({
+        message: "Cômodo deletado com sucesso.",
+        comodo: comodoDeletado,
+      });
+    } catch (error) {
+      // Verifica se o erro é de dispositivos relacionados
+      if (error.message.includes("relacionado aos seguintes dispositivos")) {
+        return res.status(400).json({
+          message: error.message,
+        });
+      }
+  
+      // Trata outros erros inesperados
+      return res.status(500).json({
+        message: "Erro ao deletar cômodo.",
+        error: error.message,
+      });
+    }
+  }
 }
 
 export default new ComodoController();

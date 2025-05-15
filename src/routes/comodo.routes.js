@@ -16,6 +16,6 @@ router.post("/", ComodoController.create);
 router.put("/:id", ComodoController.update);
 
 // Rota para deletar um cômodo pelo ID (se necessário)
-// router.delete("/:id", ComodoController.delete);
+router.delete("/:id", ComodoController.delete);
 
 export default router;
