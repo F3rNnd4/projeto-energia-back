@@ -4,5 +4,6 @@ import DispositivoController from "../controllers/dispositivo.controller.js";
 const router = express.Router();
 
 router.get("/", DispositivoController.getAll);
+router.get("/:id", DispositivoController.getById);
 
 export default router;
