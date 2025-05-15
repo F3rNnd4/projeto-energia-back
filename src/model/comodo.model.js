@@ -53,6 +53,7 @@ class ComodoModel {
       return novoComodo;
     }
 
+    // Método para atualizar um cômodo pelo seu ID
     async update(id, nome) {
       const comodo = await this.findById(id);
     
