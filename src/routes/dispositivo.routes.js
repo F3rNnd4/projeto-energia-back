@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.get("/", DispositivoController.getAll);
 router.get("/:id", DispositivoController.getById);
+router.post("/", DispositivoController.create);
 
 export default router;

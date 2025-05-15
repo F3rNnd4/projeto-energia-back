@@ -26,10 +26,35 @@ class DispositivoController {
 
       res
         .status(200)
-        .json({ message: `🟢 Dispositovo com ID ${id} encontrado:`, dispositivo });
+        .json({
+          message: `🟢 Dispositovo com ID ${id} encontrado:`,
+          dispositivo,
+        });
     } catch (error) {
       console.error("Erro ao buscar dispositivo:", error);
       res.status(500).json({ error: "Erro ao buscar dispositivo!" });
+    }
+  }
+
+  // Criar um novo dispositivo
+  async create(req, res) {
+    try {
+      const data = req.body;
+  
+      const resultado = await DispositivoModel.create(data);
+  
+      if (resultado.error) {
+        return res.status(400).json(resultado);
+      }
+  
+      res
+        .status(201)
+        .json({ message: "Dispositivo criado com sucesso!", dispositivo: resultado });
+    } catch (error) {
+      console.error("Erro ao criar dispositivo no controller:", error); // Log detalhado
+      res.status(500).json({
+        error: "Erro ao criar dispositivo. Tente novamente mais tarde.",
+      });
     }
   }
 }
