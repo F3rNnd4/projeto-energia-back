@@ -47,7 +47,7 @@ class DispositivoModel {
   async create(data) {
     try {
       const { nome, potencia, tempoUso, voltagem, corrente, comodoId } = data;
-  
+
       const camposFaltando = [];
       if (!nome) camposFaltando.push("nome");
       if (!potencia) camposFaltando.push("potencia");
@@ -55,14 +55,14 @@ class DispositivoModel {
       if (!voltagem) camposFaltando.push("voltagem");
       if (!corrente) camposFaltando.push("corrente");
       if (!comodoId) camposFaltando.push("comodoId");
-  
+
       if (camposFaltando.length > 0) {
         return {
           error: "Os seguintes campos são obrigatórios:",
           camposFaltando,
         };
       }
-  
+
       const novoDispositivo = await prisma.dispositivo.create({
         data: {
           nome,
@@ -73,12 +73,81 @@ class DispositivoModel {
           comodoId: Number(comodoId),
         },
       });
-  
+
       return novoDispositivo;
     } catch (error) {
       console.error("Erro ao criar dispositivo no modelo:", error); // Log detalhado
       throw new Error("Erro ao criar dispositivo. Tente novamente mais tarde.");
     }
+  }
+
+  // Atualizar um dispositivo existente
+  async update(id, data) {
+    const dispositivo = await this.getById(id);
+
+    // Verifica se o dispositivo existe
+    if (!dispositivo) {
+      return {
+        error: `Dispositivo com ID ${id} não encontrado.`,
+      };
+    }
+
+    const { nome, potencia, tempoUso, voltagem, corrente, comodoId } = data;
+
+      const camposFaltando = [];
+      if (!nome) camposFaltando.push("nome");
+      if (!potencia) camposFaltando.push("potencia");
+      if (!tempoUso) camposFaltando.push("tempoUso");
+      if (!voltagem) camposFaltando.push("voltagem");
+      if (!corrente) camposFaltando.push("corrente");
+      if (!comodoId) camposFaltando.push("comodoId");
+
+      if (camposFaltando.length > 0) {
+        return {
+          error: "Os seguintes campos são obrigatórios:",
+          camposFaltando,
+        };
+      }
+
+    // Atualiza o dispositivo com os novos dados
+    const dispositivoAtualizado = await prisma.dispositivo.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        nome,
+        potencia,
+        tempoUso,
+        voltagem,
+        corrente,
+        comodoId: Number(comodoId),
+      },
+    });
+
+    return dispositivoAtualizado;
+  }
+
+  // Deletar um dispositivo
+  async delete (id) {
+    const dispositivo = await this.getById(id);
+
+    // Verifica se o dispositivo existe
+    if (!dispositivo) {
+      return {
+        error: `Dispositivo com ID ${id} não encontrado.`,
+      };
+    }
+
+    // Deleta o dispositivo
+    await prisma.dispositivo.delete({
+      where: {
+        id: Number(id)
+      }
+    });
+
+    return {
+      message: `Dispositivo com ID ${id} deletado com sucesso!`,
+    };
   }
 }
 
