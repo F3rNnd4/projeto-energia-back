@@ -43,14 +43,33 @@ class ComodoModel {
     }
 
     // Método para criar um novo cômodo
-    async create(name) {
-        const novoComodo = await prisma.comodo.create({
-            data: {
-                nome
-            },
-        });
+    async create(nome) {
+      const novoComodo = await prisma.comodo.create({
+        data: {
+          nome, 
+        },
+      });
+    
+      return novoComodo;
+    }
 
-        return novoComodo;
+    async update(id, nome) {
+      const comodo = await this.findById(id);
+    
+      if (!comodo) {
+        return null; 
+      }
+    
+      const comodoAtualizado = await prisma.comodo.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          nome,
+        },
+      });
+    
+      return comodoAtualizado;
     }
 
 }

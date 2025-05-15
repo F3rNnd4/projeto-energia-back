@@ -51,7 +51,7 @@ class DispositivoController {
         .status(201)
         .json({ message: "Dispositivo criado com sucesso!", dispositivo: resultado });
     } catch (error) {
-      console.error("Erro ao criar dispositivo no controller:", error); // Log detalhado
+      console.error("Erro ao criar dispositivo no controller:", error); 
       res.status(500).json({
         error: "Erro ao criar dispositivo. Tente novamente mais tarde.",
       });
