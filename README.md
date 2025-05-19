@@ -1,4 +1,4 @@
-# 💡 Projeto Energia - API Backend
+# 💡 Projeto do Dia da Energia - API Back-end
 
 Este é o back-end de uma aplicação desenvolvida para controle de geração e consumo de energia. A API permite o cadastro e gerenciamento de cômodos e dos dispositivos presentes neles, com o objetivo de organizar dados que futuramente poderão ser utilizados para monitoramento de consumo energético.
 
