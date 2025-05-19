@@ -1,4 +1,4 @@
-import DispositivoModel from "../model/dispositivo.model.js";
+import DispositivoModel from "../models/dispositivo.model.js";
 
 class DispositivoController {
   async getAll(req, res) {
