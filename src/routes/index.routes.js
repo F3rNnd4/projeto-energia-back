@@ -16,4 +16,5 @@ routes.use("/dispositivos", dispositivoRoutes);
 // Rotas - Comodos
 routes.use("/comodos", comodoRoutes);
 
+
 export default routes;
