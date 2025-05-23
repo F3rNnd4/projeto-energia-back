@@ -60,46 +60,42 @@ class DispositivoController {
 
   // Atualizar um dispositivo existente
   async update(req, res) {
-    try {
-      const { id } = req.params;
+  try {
+    const { id } = req.params;
+    const {
+      nome,
+      potencia,
+      tempoUso,
+      voltagem,
+      corrente,
+      comodoId,
+      marca,        // novo campo
+      descricao     // novo campo
+    } = req.body;
 
-      const {
-        nome,
-        potencia,
-        tempoUso,
-        voltagem,
-        corrente,
-        comodoId,
-      } = req.body;
+    // Atualiza o dispositivo
+    const dispositivoAtualizado = await DispositivoModel.update(
+      id,
+      { nome, potencia, tempoUso, voltagem, corrente, comodoId, marca, descricao }
+    );
 
-      // Atualiza o dispositivo
-      const dispositivoAtualizado = await DispositivoModel.update(
-        id,
-        nome,
-        potencia,
-        tempoUso,
-        voltagem,
-        corrente,
-        comodoId
-      );
-
-      if (!dispositivoAtualizado) {
-        return res
-          .status(404)
-          .json({ error: `🔴 Dispositivo com ID ${id} não encontrado.` });
-      }
-
-      res.status(200).json({
-        message: `🟢 Dispositivo com ID ${id} atualizado com sucesso!`,
-        dispositivo: dispositivoAtualizado,
-      });
-    } catch (error) {
-      console.error("Erro ao atualizar dispositivo:", error);
-      res.status(500).json({
-        error: "Erro ao atualizar dispositivo. Tente novamente mais tarde.",
-      });
+    if (!dispositivoAtualizado) {
+      return res
+        .status(404)
+        .json({ error: `🔴 Dispositivo com ID ${id} não encontrado.` });
     }
+
+    res.status(200).json({
+      message: `🟢 Dispositivo com ID ${id} atualizado com sucesso!`,
+      dispositivo: dispositivoAtualizado,
+    });
+  } catch (error) {
+    console.error("Erro ao atualizar dispositivo:", error);
+    res.status(500).json({
+      error: "Erro ao atualizar dispositivo. Tente novamente mais tarde.",
+    });
   }
+}
 
   // Deletar um dispositivo
   async delete(req, res){
