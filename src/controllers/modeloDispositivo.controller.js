@@ -1,51 +1,13 @@
-const modelos = [
-  {
-    nome: "Lâmpada",
-    potencia: 60,
-    voltagem: 110,
-    corrente: 0.55,
-  },
-  {
-    nome: "Ar Condicionado",
-    potencia: 2000,
-    voltagem: 220,
-    corrente: 9.1,
-  },
-  {
-    nome: "Geladeira",
-    potencia: 150,
-    voltagem: 220,
-    corrente: 0.68,
-  },
-  {
-    nome: "Chuveiro",
-    potencia: 5500,
-    voltagem: 220,
-    corrente: 25.0,
-  },
-  {
-    nome: "Ventilador",
-    potencia: 80,
-    voltagem: 110,
-    corrente: 0.73,
-  },
-  {
-    nome: "TV",
-    potencia: 100,
-    voltagem: 110,
-    corrente: 0.91,
-  },
-  {
-    nome: "Microondas",
-    potencia: 1200,
-    voltagem: 220,
-    corrente: 5.45,
-  },
-];
+import ModeloDispositivoModel from "../models/modeloDispositivo.model.js";
 
 class ModeloDispositivoController {
   async getAll(req, res) {
-    res.status(200).json(modelos);
+    try {
+      const dispositivos = await ModeloDispositivoModel.getAll();
+      res.status(200).json(dispositivos);
+    } catch (error) {
+      res.status(500).json({ error: "Erro ao buscar modelos do banco." });
+    }
   }
 }
 
