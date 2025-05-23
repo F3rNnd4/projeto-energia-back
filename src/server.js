@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import cors from "cors";
 
 import routes from "./routes/index.routes.js";
+import modelosRoutes from "./routes/modelos.routes.js"; // <-- Adicione esta linha
 
 config(); // Carrega variáveis de ambiente do arquivo .env
 const port = process.env.PORT || 4001; // Define a porta do servidor
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", routes);
+app.use("/api/modelos", modelosRoutes);
 
 // Middleware para tratamento de erros
 app.use((err, req, res, next) => {

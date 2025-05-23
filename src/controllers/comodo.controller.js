@@ -1,4 +1,4 @@
-import ComodoModel from "../models/comodo.model.jss";
+import ComodoModel from "../models/comodo.model.js";
 
 class ComodoController {
   // Listar todos os cômodos
