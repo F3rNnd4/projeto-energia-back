@@ -115,6 +115,61 @@ async function main() {
         }
     });
 
+    const computador = await prisma.dispositivo.create({
+        data: {
+            nome: "Computador",
+            potencia: 300,
+            tempoUso: 8,
+            voltagem: 110,
+            corrente: 2.73,
+            comodoId: quarto.id
+        }
+    });
+
+    const secador = await prisma.dispositivo.create({
+        data: {
+            nome: "Secador",
+            potencia: 2000,
+            tempoUso: 1,
+            voltagem: 220,
+            corrente: 9.1,
+            comodoId: banheiro.id
+        }
+    });
+
+    const airfryer = await prisma.dispositivo.create({
+        data: {
+            nome: "Air Fryer",
+            potencia: 1500,
+            tempoUso: 2,
+            voltagem: 220,
+            corrente: 6.82,
+            comodoId: cozinha.id
+        }
+    });
+
+    const babyliss = await prisma.dispositivo.create({
+        data: {
+            nome: "Babyliss",
+            potencia: 1000,
+            tempoUso: 1,
+            voltagem: 110,
+            corrente: 9.09,
+            comodoId: banheiro.id
+        }
+    });
+
+    const aquecedor = await prisma.dispositivo.create({
+        data: {
+            nome: "Aquecedor",
+            potencia: 1500,
+            tempoUso: 2,
+            voltagem: 220,
+            corrente: 6.82,
+            comodoId: quarto.id
+        }
+    });
+
     console.log("Dispositivos criados...");
 
     console.log(
