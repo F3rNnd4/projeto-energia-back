@@ -10,21 +10,23 @@ datasource db {
 
 model Comodo {
   id           Int           @id @default(autoincrement())
-  nome         String // Nome do cômodo (ex: sala, cozinha, etc.)
-  dispositivos Dispositivo[] // Relacionamento com Dispositivo
+  nome         String
+  dispositivos Dispositivo[]
 
   @@map("comodos")
 }
 
 model Dispositivo {
-  id       Int    @id @default(autoincrement())
-  nome     String // Tipo: ventilador, TV, etc.
-  potencia Float // em Watts (W)
-  tempoUso Float // em horas por dia
-  voltagem Float // em Volts (V)
-  corrente Float // em Amperes (A)
-  comodoId Int
-  comodo   Comodo @relation(fields: [comodoId], references: [id])
+  id        Int     @id @default(autoincrement())
+  nome      String
+  potencia  Float
+  tempoUso  Float
+  voltagem  Float
+  corrente  Float
+  comodoId  Int
+  comodo    Comodo  @relation(fields: [comodoId], references: [id])
+  marca     String?
+  descricao String?
 
   @@map("dispositivos")
 }
