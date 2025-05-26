@@ -3,16 +3,16 @@ import ComodoModel from "../models/comodo.model.js";
 class ComodoController {
   // Listar todos os cômodos
   async findAll(req, res) {
-    try {
-      const result = await ComodoModel.findAll();
-      return res.status(200).json(result);
-    } catch (error) {
-      return res.status(500).json({
-        message: "Erro ao buscar cômodos",
-        error: error.message,
-      });
-    }
+  try {
+    const result = await ComodoModel.findAll();
+    return res.status(200).json(result.comodos); // Retorna só o array!
+  } catch (error) {
+    return res.status(500).json({
+      message: "Erro ao buscar cômodos",
+      error: error.message,
+    });
   }
+}
 
   // Buscar um cômodo pelo ID
   async findById(req, res) {
