@@ -1,5 +1,5 @@
-# Usar uma imagem oficial do Node.js
-FROM node:18-alpine
+# Usar uma imagem oficial do Node.js 20 LTS (alpine)
+FROM node:20-alpine
 
 # Diretório de trabalho dentro do container
 WORKDIR /app
